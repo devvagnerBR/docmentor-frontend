@@ -14,7 +14,7 @@ export default {
       },colors: {
 
         primary: {
-          "400": "#2E53FF"
+          "400": "#94C7F6"
         },
         secondary: {
           "50": "#FFFFFF",

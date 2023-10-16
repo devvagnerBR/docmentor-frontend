@@ -29,7 +29,7 @@ export const useLogin = () => {
         onSuccess: ( data ) => {
             setCookie( "token", data )
             queryClient.invalidateQueries( ["user"] )
-            navigate( "/dashboard" )
+            navigate( "/painel" )
 
         },
         onError: ( error: any ) => {
