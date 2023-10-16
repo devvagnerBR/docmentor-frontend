@@ -1,10 +1,9 @@
+import { Routers } from "./router"
 import "./styles/sass.scss"
 function App() {
 
   return (
-    <div>
-      HOME PAGE
-    </div>
+    <Routers />
   )
 }
 

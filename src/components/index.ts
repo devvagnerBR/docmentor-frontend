@@ -1,0 +1,1 @@
+export { SideBanner } from "@/components/side-banner"
