@@ -6,15 +6,19 @@ import { useLocation } from 'react-router-dom';
 
 export const Header = () => {
 
+    const user = userRequests()
     const { pathname } = useLocation();
     const hideHeader = pathname === '/entrar' || pathname === '/cadastro' || pathname === '/';
 
-    const user = userRequests()
-    const { data, isLoading } = useQuery( "user", user.getUserById, { enabled: !!getCookie( "token" ) } )
+    const { data } = useQuery(
+        ["user"],
+        user.getUserById,
+        { enabled: !!getCookie( "token" ) }
+    )
 
     if ( hideHeader ) return null
     return (
-        <div className='h-20 flex items-center justify-between px-4'>
+        <div className='h-20 flex max-w-[1920px] w-screen items-center justify-between px-4'>
             <p>DOCMENTOR</p>
             <div className='flex items-center'>
                 <div className=' flex items-center  cursor-pointer'>

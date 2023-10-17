@@ -35,7 +35,7 @@ export const useSignup = () => {
     const { mutateAsync, isLoading, error, } = useMutation( user.signup, {
         onSuccess: ( data ) => {
             setCookie( "token", data )
-            navigate( "/painel" )
+            navigate( "/painel/alunos" )
         },
         onError: ( error: any ) => {
             console.log( error.message );

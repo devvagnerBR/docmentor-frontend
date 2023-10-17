@@ -5,7 +5,7 @@ export const menuData = [
         id: 1,
         name: 'Alunos',
         icon: Icon.Users,
-        path: '/painel',
+        path: '/painel/alunos',
         exact: true
     },
     {

@@ -18,18 +18,17 @@ const formLoginValidade = z.object( {
 } )
 
 
-
 export const useLogin = () => {
 
     const navigate = useNavigate()
     const user = userRequests();
     const { register, setValue, handleSubmit, formState: { errors } } = useForm<LoginFormData>( { resolver: zodResolver( formLoginValidade ) } );
 
-    const { mutateAsync, isLoading, error, } = useMutation( user.login, {
+    const { mutateAsync: login, isLoading, error, } = useMutation( user.login, {
         onSuccess: ( data ) => {
             setCookie( "token", data )
             queryClient.invalidateQueries( ["user"] )
-            navigate( "/painel" )
+            navigate( "/painel/alunos" )
 
         },
         onError: ( error: any ) => {
@@ -38,14 +37,14 @@ export const useLogin = () => {
     } )
 
     const onSubmit = handleSubmit( async ( data ) => {
-
         try {
-            await mutateAsync( data )
-
+            await login( data )
         } catch ( error: any ) {
             throw new Error( error.message )
         }
     } )
+
+
     return {
         register,
         setValue,

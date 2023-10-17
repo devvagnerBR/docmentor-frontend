@@ -9,11 +9,11 @@ export const DashBoard = () => {
     useAuth()
 
     return (
-        <div className="h-[calc(100vh-80px)] flex">
+        <div className="h-[calc(100vh-80px)] max-w-[1920px] w-screen flex">
             <SidebarMenu />
-            <div className="flex pl-4">
+            <div className="flex  pl-24 w-full pr-4">
                 <Routes>
-                    <Route path="/" element={<DashboardStudents />} />
+                    <Route path="alunos" element={<DashboardStudents />} />
                 </Routes>
             </div>
         </div>
