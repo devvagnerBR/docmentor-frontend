@@ -6,16 +6,14 @@
 
 .sidebar_active.active {
 
-    @apply bg-primary-400 rounded-md;
+    @apply bg-primary-400 border border-black border-r-0 border-l-0;
 
     svg {
-        @apply fill-secondary-50;
+        @apply fill-neutral-900;
     }
 
     p {
-        @apply text-secondary-50
+        @apply text-neutral-900 uppercase
     }
-
-
 
 }

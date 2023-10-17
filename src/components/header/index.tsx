@@ -16,7 +16,7 @@ export const Header = () => {
     return (
         <div className='h-20 flex items-center justify-between px-4'>
             <p>DOCMENTOR</p>
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center'>
                 <div className=' flex items-center  cursor-pointer'>
                     <Icon.EnvelopeSimple className='' weight='regular' size={24} />
                     <p className='flex items-center justify-center text-white bg-primary-400 h-4 text-xs w-4 font-medium border border-black  rounded-full relative left-[-10px] top-[-6px] '>2</p>

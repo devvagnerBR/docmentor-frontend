@@ -1,0 +1,1 @@
+export { menuData } from "./menu-data"
