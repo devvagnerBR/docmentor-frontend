@@ -2,6 +2,7 @@ import { SidebarMenu } from "@/components"
 import { useAuth } from "@/hooks"
 import { Routes, Route } from 'react-router-dom';
 import { DashboardStudents } from "..";
+import { StudentDetails } from "./students/student-details";
 
 
 export const DashBoard = () => {
@@ -14,6 +15,7 @@ export const DashBoard = () => {
             <div className="flex  pl-24 w-full pr-4">
                 <Routes>
                     <Route path="alunos" element={<DashboardStudents />} />
+                    <Route path="alunos/:studentId" element={<StudentDetails />} />
                 </Routes>
             </div>
         </div>

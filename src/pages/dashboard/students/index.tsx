@@ -5,6 +5,7 @@ import { userRequests } from '@/requests'
 import { useQuery } from 'react-query'
 import { StudentInterface } from '@/types/student-interface'
 import { getPageWidth, limitText } from '@/utils'
+import { Link } from 'react-router-dom'
 
 export const DashboardStudents = () => {
 
@@ -35,18 +36,20 @@ export const DashboardStudents = () => {
             {students && students?.length > 0 ? <main className='mt-4'>
                 {students?.map( ( student, index: number ) => {
                     return (
-                        <section
-                            key={student.id}
-                            className='h-16 border cursor-pointer transition-all ease-in-out duration-300 rounded-md border-white hover:border-black flex justify-between w-full  items-center px-4 max-sm:px-2'>
-                            <div className='flex items-center gap-8 max-sm:gap-4'>
-                                <p className=' text-sm'>{( index + 1 ).toString().padStart( 2, '0' )}</p>
-                                <div className='flex flex-col gap-1'>
-                                    <p className='uppercase font-semibold max-sm:text-sm'>{size >= 500 ? student.name : limitText( student?.name, 15 )}</p>
-                                    <p className='text-xs uppercase font-light'>TURMA {student.school_grade}</p>
+                        <Link key={student.id} to={student.id}>
+                            <section
+                                key={student.id}
+                                className='h-16 border cursor-pointer transition-all ease-in-out duration-300 rounded-md border-white hover:border-black flex justify-between w-full  items-center px-4 max-sm:px-2'>
+                                <div className='flex items-center gap-8 max-sm:gap-4'>
+                                    <p className=' text-sm'>{( index + 1 ).toString().padStart( 2, '0' )}</p>
+                                    <div className='flex flex-col gap-1'>
+                                        <p className='uppercase font-semibold max-sm:text-sm'>{size >= 500 ? student.name : limitText( student?.name, 15 )}</p>
+                                        <p className='text-xs uppercase font-light'>TURMA {student.school_grade}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            {size > 600 && <Icon.CaretRight size={20} weight='light' className='fill-black' />}
-                        </section>
+                                {size > 600 && <Icon.CaretRight size={20} weight='light' className='fill-black' />}
+                            </section>
+                        </Link>
                     )
                 } )}
             </main> : <p className='mt-4 text-neutral-500'>nenhum aluno encontrado</p>

@@ -22,7 +22,7 @@ export const SearchBar = ( { searchInput, setSearchInput }: { searchInput: strin
             <input
                 onChange={( e ) => setSearchInput( e.target.value )}
                 type="text"
-                className='pl-2  w-full max-sm:placeholder:text-sm'
+                className='pl-2  w-full max-sm:placeholder:text-sm uppercase'
                 placeholder='PESQUISAR ALUNO'
                 value={searchInput}
             />

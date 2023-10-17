@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 *{
-    @apply p-0 m-0 box-border outline-none scroll-smooth leading-4 text-neutral-600 font-IBM
+    @apply p-0 m-0 box-border outline-none scroll-smooth leading-4 text-neutral-600 font-IBM uppercase
 }
 
 html,body{
