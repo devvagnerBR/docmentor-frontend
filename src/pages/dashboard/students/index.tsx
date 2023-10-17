@@ -8,30 +8,31 @@ import { getPageWidth, limitText } from '@/utils'
 
 export const DashboardStudents = () => {
 
+    const [searchInput, setSearchInput] = React.useState<string>( "" )
     const user = userRequests()
     const { size } = getPageWidth()
-    const [searchInput, setSearchInput] = React.useState( "" )
 
     const { data: students } = useQuery<StudentInterface[]>(
-        ["students"],
+        ["students", searchInput],
         () => user.getStudents( "" ),
         {
             refetchOnWindowFocus: false,
             staleTime: 1000 * 60, // 1 minuto
-            // enabled: searchInput.length >= 3
         }
     )
-
 
     return (
         <div className='w-full '>
             <header className='flex items-center gap-4 w-full'>
-                <SearchBar />
+                <SearchBar
+                    searchInput={searchInput}
+                    setSearchInput={setSearchInput}
+                />
                 <div className='border cursor-pointer h-14 w-14 flex items-center shrink-0 justify-center rounded-md bg-primary-400 border-neutral-900'>
                     <Icon.UserPlus className='fill-neutral-900' size={28} weight='light' />
                 </div>
             </header>
-            <main className='mt-4'>
+            {students && students?.length > 0 ? <main className='mt-4'>
                 {students?.map( ( student, index: number ) => {
                     return (
                         <section
@@ -48,7 +49,8 @@ export const DashboardStudents = () => {
                         </section>
                     )
                 } )}
-            </main>
-        </div>
+            </main> : <p className='mt-4 text-neutral-500'>nenhum aluno encontrado</p>
+            }
+        </div >
     )
 }
