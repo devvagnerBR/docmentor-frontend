@@ -1,3 +1,5 @@
 export { useLogin } from "@/hooks/useLogin"
 export { useAuth } from "@/hooks/use-auth"
 export { useSignup } from "@/hooks/use-signup"
+export { useUpdateStudent } from "@/hooks/use-update-student"
+export { useUpdateParent } from "@/hooks/use-update-parent"

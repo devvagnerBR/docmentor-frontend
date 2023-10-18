@@ -1,3 +1,4 @@
+import { UpdateStudentFormData } from "@/hooks/use-update-student"
 import { docmentorAPI, getCookie } from "@/services"
 
 export const studentRequests = () => {
@@ -18,8 +19,31 @@ export const studentRequests = () => {
         }
     }
 
+    const updateStudent = async ( data: UpdateStudentFormData ) => {
+
+        try {
+
+            const res = await docmentorAPI.put( `/update/${data.studentId}`,
+                {
+                    name: data.name || undefined,
+                    birthday: String( new Date( data.birthday! ).getTime() ) || undefined,
+                    school_year: data.school_year || undefined,
+                    service_days: data.service_days || undefined
+                },
+                { headers: { Authorization: token } },
+
+            )
+
+            return res
+
+        } catch ( error: any ) {
+            throw new Error( error.response.data )
+        }
+
+    }
 
     return {
-        getStudentById
+        getStudentById,
+        updateStudent
     }
 }

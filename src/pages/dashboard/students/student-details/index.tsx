@@ -5,11 +5,17 @@ import { EditButton } from '@/components'
 import { momentJS } from '@/services/moment-js'
 import { limitText } from '@/utils'
 
+import { UpdateStudent } from './modal/update-student'
+import { UpdateParent } from './modal/update-parent'
+import { Modal } from './modal'
+import { useModalContext } from '@/context/modal-context'
+
 export const StudentDetails = () => {
 
-    const { studentId } = useParams()
     const navigate = useNavigate()
+    const { studentId } = useParams()
     const { student } = useStudentDetails( studentId! )
+    const { updateStudent } = useModalContext()
 
     const school = student?.school
     const parent = student?.parents
@@ -21,10 +27,14 @@ export const StudentDetails = () => {
         return index === serviceDays.length - 1 ? formattedDay : formattedDay + ' | ';
     } ).join( "" )
 
-
     if ( student )
         return (
-            <div className='w-full mb-4'>
+            <div className='w-full  relative mb-4'>
+
+                {updateStudent.state && <Modal.Root>
+                    {/* <UpdateParent studentId={studentId!} /> */}
+                    <UpdateStudent studentId={studentId!} />
+                </Modal.Root>}
 
                 <header className='flex gap-4 items-center'>
                     <Icon.CaretLeft onClick={() => navigate( -1 )} size={32} weight='regular' className='fill-neutral-500 cursor-pointer' />
@@ -35,7 +45,7 @@ export const StudentDetails = () => {
                     <div className='flex gap-2 items-center'>
                         <h6 className='font-semibold '>{student.name}</h6>
                         <EditButton
-                            onClick={() => console.log( 'editar aluno' )}
+                            onClick={() => updateStudent.setState( true )}
                             title='editar perfil'
                         />
                     </div>
