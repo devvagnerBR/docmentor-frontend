@@ -31,10 +31,16 @@ export const StudentDetails = () => {
         return (
             <div className='w-full  relative mb-4'>
 
-                {updateStudent.state || updateParent.state && <Modal.Root>
-                    {updateParent.setState! && <UpdateParent studentId={studentId!} />}
-                    {updateStudent.state && <UpdateStudent studentId={studentId!} />}
-                </Modal.Root>}
+                {updateStudent.state &&
+                    <Modal.Root>
+                        {updateStudent.state && <UpdateStudent studentId={studentId!} />}
+                    </Modal.Root>
+                }
+                {updateParent.state &&
+                    <Modal.Root>
+                        {updateParent.state && <UpdateParent studentId={studentId!} />}
+                    </Modal.Root>
+                }
 
                 <header className='flex gap-4 items-center'>
                     <Icon.CaretLeft onClick={() => navigate( -1 )} size={32} weight='regular' className='fill-neutral-500 cursor-pointer' />
@@ -115,8 +121,6 @@ export const StudentDetails = () => {
 
                         <Icon.Article size={26} className='fill-neutral-900' />
                         <h2 className='font-semibold max-md:text-sm'>RELATÓRIOS</h2>
-
-                        <EditButton title='EDITAR DADOS' onClick={() => console.log( "editar dados" )} />
                     </header>
                     <button
                         className='mt-8 border mb-8 h-12 px-4 rounded-md border-neutral-900 bg-primary-400 text-white font-semibold'>
