@@ -45,7 +45,7 @@ export const useUpdateStudent = ( studentId: string ) => {
     const { data: student } = useQuery<StudentDetailsInterface>(
 
         ["student", studentId],
-        () => getStudentById( studentId! ),
+        () => getStudentById( studentId),
         {
             refetchOnMount: true,
             refetchOnWindowFocus: false,

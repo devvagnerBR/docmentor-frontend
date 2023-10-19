@@ -15,7 +15,7 @@ export const StudentDetails = () => {
     const navigate = useNavigate()
     const { studentId } = useParams()
     const { student } = useStudentDetails( studentId! )
-    const { updateStudent } = useModalContext()
+    const { updateStudent, updateParent } = useModalContext()
 
     const school = student?.school
     const parent = student?.parents
@@ -31,9 +31,9 @@ export const StudentDetails = () => {
         return (
             <div className='w-full  relative mb-4'>
 
-                {updateStudent.state && <Modal.Root>
-                    {/* <UpdateParent studentId={studentId!} /> */}
-                    <UpdateStudent studentId={studentId!} />
+                {updateStudent.state || updateParent.state && <Modal.Root>
+                    {updateParent.setState! && <UpdateParent studentId={studentId!} />}
+                    {updateStudent.state && <UpdateStudent studentId={studentId!} />}
                 </Modal.Root>}
 
                 <header className='flex gap-4 items-center'>
@@ -70,7 +70,7 @@ export const StudentDetails = () => {
                     <header className='flex  gap-2 items-center'>
                         <Icon.Info size={26} className='fill-neutral-900 shrink-0' />
                         <p className='font-semibold max-md:text-sm'>RESPONSÁVEIS</p>
-                        <EditButton title='EDITAR DADOS' onClick={() => console.log( "editar dados" )} />
+                        <EditButton title='EDITAR DADOS' onClick={() => updateParent.setState( true )} />
                     </header>
                     {parent ? <main className='flex flex-col gap-4'>
                         <section className='mt-4 gap-4 max-sm:divide-x-0 divide-x-2 flex max-sm:flex-col  '>
