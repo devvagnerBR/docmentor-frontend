@@ -1,4 +1,4 @@
-export const inputsData = [
+export const parentInputData = [
 
     {
         id: 1,

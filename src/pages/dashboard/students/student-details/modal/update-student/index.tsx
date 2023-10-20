@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Icon from "@phosphor-icons/react"
-import { daysOfTheWeek } from '@/data';
+import { daysOfTheWeek, studentInputData } from '@/data';
 import { useUpdateStudent } from '@/hooks';
 import { momentJS } from '@/services/moment-js';
 import { useModalContext } from '@/context/modal-context';
@@ -15,7 +15,8 @@ export const UpdateStudent = ( { studentId }: UpdateStudentProps ) => {
         onSubmit,
         register,
         student,
-        currentValue
+        currentValue,
+        errors
     } = useUpdateStudent( studentId as string )
 
     const { updateStudent } = useModalContext()
@@ -29,7 +30,23 @@ export const UpdateStudent = ( { studentId }: UpdateStudentProps ) => {
 
             <form onSubmit={( e ) => onSubmit( e, studentId )} className='flex flex-col w-full items-center justify-center gap-4 p-2 '>
 
-                <label
+                {studentInputData?.map( ( student ) => {
+                    return (
+                        <label key={student.id} htmlFor={student.name}
+                            className='flex flex-col gap-1 text-sm font-medium w-full'>
+                            {student.label}
+                            <input
+                                defaultValue={currentValue[student.name as keyof typeof currentValue] ?? student?.[student.name as keyof typeof student]}
+                                {...register( student.name as keyof typeof currentValue )}
+                                name={student.name}
+                                id={student.id}
+                                className='border h-12 w-full pl-4  border-black rounded-md'
+                                type={student.type} />
+                        </label>
+                    )
+                } )}
+
+                {/* <label
                     htmlFor="name"
                     className='flex flex-col gap-1 text-sm font-medium w-full'>
                     NOME:
@@ -62,7 +79,7 @@ export const UpdateStudent = ( { studentId }: UpdateStudentProps ) => {
                         {...register( 'school_year' )}
                         type="text"
                         className='border h-12 w-full pl-2  border-black rounded-md' />
-                </label>
+                </label> */}
 
                 <section className='w-full flex flex-col gap-1'>
                     <p className='font-semibold text-sm'>DIAS DE ATENDIMENTO:</p>

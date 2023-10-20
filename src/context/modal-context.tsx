@@ -15,8 +15,8 @@ const ModalContext = React.createContext<UserContextProps | null>( null )
 
 const ModalContextProvider = ( { children }: React.PropsWithChildren ) => {
 
-    const [updateStudentModal, setUpdateStudentModal] = React.useState<boolean>( false )
-    const [updateParentModal, setUpdateParentModal] = React.useState<boolean>( true )
+    const [updateStudentModal, setUpdateStudentModal] = React.useState<boolean>( true )
+    const [updateParentModal, setUpdateParentModal] = React.useState<boolean>( false )
 
     const updateStudent = {
         state: updateStudentModal,

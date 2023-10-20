@@ -1,3 +1,4 @@
 export { menuData } from "./menu-data"
 export { daysOfTheWeek } from "./week-data"
-export { inputsData } from "./input-data"
+export { studentInputData } from "./student-input-data"
+export { parentInputData } from "./parent-input-data"

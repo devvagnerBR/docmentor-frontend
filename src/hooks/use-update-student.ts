@@ -45,7 +45,7 @@ export const useUpdateStudent = ( studentId: string ) => {
     const { data: student } = useQuery<StudentDetailsInterface>(
 
         ["student", studentId],
-        () => getStudentById( studentId),
+        () => getStudentById( studentId ),
         {
             refetchOnMount: true,
             refetchOnWindowFocus: false,
@@ -91,10 +91,10 @@ export const useUpdateStudent = ( studentId: string ) => {
                 const body = {
                     name: data.name === student?.name ? undefined : data.name,
                     birthday: data.birthday === student?.birthday ? undefined : data.birthday,
-                    school_grade: data.school_year === student?.school_grade ? undefined : data.school_year,
+                    school_year: data.school_year === student?.school_grade ? undefined : data.school_year,
                     service_days: data.service_days === student?.service_days ? undefined : data.service_days,
                 }
-                // await updateStudent( { ...body, studentId } )
+                console.log( { ...body, studentId } )
                 await mutate.mutateAsync( { ...body, studentId } )
 
             } catch ( error: any ) {

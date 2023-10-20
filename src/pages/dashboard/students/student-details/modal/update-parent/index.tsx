@@ -1,6 +1,6 @@
 import { useModalContext } from '@/context/modal-context';
-import {  inputsData } from '@/data';
-import { useUpdateParent} from '@/hooks';
+import { parentInputData } from '@/data';
+import { useUpdateParent } from '@/hooks';
 import { ParentsInterface } from '@/types/parent-interface';
 import * as Icon from "@phosphor-icons/react"
 
@@ -29,7 +29,7 @@ export const UpdateParent = ( { studentId }: UpdateParentProps ) => {
 
       <form onSubmit={( e ) => onSubmit( e, parents?.id as string )} className='flex flex-col w-full items-center justify-center gap-4 p-2 '>
 
-        {inputsData?.map( ( input ) => {
+        {parentInputData?.map( ( input ) => {
           return (
             <label key={input.id} htmlFor={input.name}
               className='flex flex-col gap-1 text-sm font-medium w-full'>
