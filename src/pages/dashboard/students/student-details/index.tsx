@@ -10,13 +10,14 @@ import { UpdateParent } from './modal/update-parent'
 import { Modal } from './modal'
 import { useModalContext } from '@/context/modal-context'
 import { NewReport } from '@/pages'
+import { ConfirmStudentDelete } from './modal/confirm-student-delete'
 
 export const StudentDetails = () => {
 
     const navigate = useNavigate()
     const { studentId } = useParams()
     const { student, deleteStudent } = useStudentDetails( studentId! )
-    const { updateStudent, updateParent, newReport } = useModalContext()
+    const { updateStudent, updateParent, newReport, deleteStudent: deleteModal } = useModalContext()
 
     const school = student?.school
     const parent = student?.parents
@@ -48,6 +49,13 @@ export const StudentDetails = () => {
                         {newReport.state && <NewReport studentId={studentId!} />}
                     </Modal.Root>
                 }
+
+                {deleteModal.state &&
+                    <Modal.Root>
+                        {deleteModal.state && <ConfirmStudentDelete studentId={studentId!} />}
+                    </Modal.Root>
+                }
+
 
                 <header className='flex gap-4 items-center'>
                     <Icon.CaretLeft onClick={() => navigate( -1 )} size={32} weight='regular' className='fill-neutral-500 cursor-pointer' />
@@ -164,7 +172,7 @@ export const StudentDetails = () => {
                         </section>
                     }
                     <div
-                        onClick={() => deleteStudent()}
+                        onClick={() => deleteModal.setState( true )}
                         className='cursor-pointer w-fit flex gap-2 items-center  h-8 mt-4  rounded-md border-neutral-300'>
                         <Icon.TrashSimple size={20} weight='light' className='fill-red-400' />
                         <p className='text-red-400 font-light text-sm'>EXCLUIR ALUNO</p>
