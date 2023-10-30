@@ -1,11 +1,14 @@
 import { studentRequests } from "@/requests"
+import { queryClient } from "@/services"
 import { StudentDetailsInterface } from "@/types/student-details-interface"
-import { useQuery } from "react-query"
+import { useMutation, useQuery } from "react-query"
+import { useNavigate } from "react-router-dom"
 
 export const useStudentDetails = ( studentId: string ) => {
 
 
     const request = studentRequests()
+    const navigate = useNavigate()
 
     const { data: student, isLoading } = useQuery<StudentDetailsInterface>(
 
@@ -17,5 +20,21 @@ export const useStudentDetails = ( studentId: string ) => {
         }
     )
 
-    return { student }
+
+    const { mutateAsync: deleteStudent } = useMutation(
+        () => request.deleteStudent( studentId ),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries( "students" )
+                queryClient.invalidateQueries( "student" )
+                navigate( `/painel/alunos` )
+            },
+        }
+    )
+
+
+    return {
+        student,
+        deleteStudent
+    }
 }

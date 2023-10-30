@@ -15,7 +15,7 @@ export const StudentDetails = () => {
 
     const navigate = useNavigate()
     const { studentId } = useParams()
-    const { student } = useStudentDetails( studentId! )
+    const { student, deleteStudent } = useStudentDetails( studentId! )
     const { updateStudent, updateParent, newReport } = useModalContext()
 
     const school = student?.school
@@ -30,7 +30,7 @@ export const StudentDetails = () => {
 
     if ( student )
         return (
-            <div className='w-full  relative mb-4'>
+            <div className='mb-8'>
 
                 {updateStudent.state &&
                     <Modal.Root>
@@ -54,7 +54,9 @@ export const StudentDetails = () => {
                     <h1 className='uppercase font-medium'>Informações do aluno</h1>
                 </header>
 
-                <section className='p-2 flex flex-col gap- mt-4'>
+
+
+                <section className='p-2 flex flex-col  mt-4'>
                     <div className='flex gap-2 items-center'>
                         <h6 className='font-semibold '>{student.name}</h6>
                         <EditButton
@@ -123,21 +125,22 @@ export const StudentDetails = () => {
                         </button>}
                 </section>
 
-                <section className={`p-2 ${parent ? 'mt-8 max-sm:mt-2' : "mt-8"} `}>
-                    <header className='flex gap-2 items-center  max-sm:w-full'>
+                <section className={`p-2`}>
+                    {/* <section className={`p-2  ${parent ? 'mt-8 max-sm:mt-2' : "mt-8"} `}> */}
+                    <button
+                        onClick={() => newReport.setState( true )}
+                        className='mt-4 border mb-8 h-12 px-4 rounded-md border-neutral-900 bg-primary-400 text-white font-semibold'>
+                        NOVO RELATÓRIO
+                    </button>
+                    <header className='flex gap-2 items-center mb-4  max-sm:w-full'>
 
                         <Icon.Article size={26} className='fill-neutral-900' />
                         <h2 className='font-semibold max-md:text-sm'>RELATÓRIOS</h2>
                     </header>
-                    <button
-                        onClick={() => newReport.setState( true )}
-                        className='mt-8 border mb-8 h-12 px-4 rounded-md border-neutral-900 bg-primary-400 text-white font-semibold'>
-                        NOVO RELATÓRIO
-                    </button>
                     {reports && reports?.length > 0 &&
                         <section className=' flex flex-col gap-4'>
                             <div className='flex max-sm:hidden items-center shrink-0'>
-                                <p className='w-56 text-sm shrink-0'>TÍTULO</p>
+                                <p className='w-64 text-sm shrink-0'>TÍTULO</p>
                                 <p className='0 w-48 text-sm shrink-0'>ÚLTIMA ATUALIZAÇÃO</p>
                                 <p className='w-40 text-sm'>AÇÕES</p>
                             </div>
@@ -147,7 +150,7 @@ export const StudentDetails = () => {
                                         <div key={report.id} className='flex items-center shrink-0'>
                                             <div className='flex w-64 max-sm:w-fit max-sm:pr-4 gap- items-center shrink-0'>
                                                 <Icon.Files size={18} weight='regular' className='fill-neutral-900' />
-                                                <p className=' font-medium text-neutral-900'>{limitText( report.title, 18 )}</p>
+                                                <p className=' font-medium text-neutral-900 max-sm:text-sm'>{limitText( report.title, 18 )}</p>
                                             </div>
                                             <p className='w-48 max-sm:hidden shrink-0 font-medium text-neutral-900'>{momentJS( report.updated_at ).format( 'DD/MM/YYYY' )}</p>
                                             <div className='flex gap-4 w-40 items-center'>
@@ -160,7 +163,9 @@ export const StudentDetails = () => {
                             </main>
                         </section>
                     }
-                    <div className='cursor-pointer w-fit flex gap-2 items-center  h-8  rounded-md border-neutral-300'>
+                    <div
+                        onClick={() => deleteStudent()}
+                        className='cursor-pointer w-fit flex gap-2 items-center  h-8 mt-4  rounded-md border-neutral-300'>
                         <Icon.TrashSimple size={20} weight='light' className='fill-red-400' />
                         <p className='text-red-400 font-light text-sm'>EXCLUIR ALUNO</p>
                     </div>

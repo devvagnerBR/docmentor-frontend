@@ -12,7 +12,7 @@ export const SidebarMenu = () => {
     const { logOut } = userRequests()
 
     return (
-        <div className='min-w-[4rem] z-50 max-sm:hidden bg-white ml-4 rounded-md border-neutral-900 border  h-[calc(100%-6rem)] gap-8  flex flex-col items-center pt-0 py-4 justify-start absolute  '>
+        <div className='min-w-[4rem] z-50 max-sm:hidden h-fit bg-white ml-4 rounded-md border-neutral-900 border   gap-8  flex flex-col items-center pt-0 py-4 justify-start absolute  '>
 
             <nav
                 onMouseEnter={mouse.handleMouseEnter}

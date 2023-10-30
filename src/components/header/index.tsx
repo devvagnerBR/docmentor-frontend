@@ -18,7 +18,7 @@ export const Header = () => {
 
     if ( hideHeader ) return null
     return (
-        <div className='h-20 flex max-w-[1920px] w-screen items-center justify-between px-4'>
+        <div className='h-20 flex max-w-[1920px] w-full items-center justify-between px-4'>
             <p>DOCMENTOR</p>
             <div className='flex items-center'>
                 <div className=' flex items-center  cursor-pointer'>

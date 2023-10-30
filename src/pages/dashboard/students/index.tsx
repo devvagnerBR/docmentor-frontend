@@ -23,7 +23,7 @@ export const DashboardStudents = () => {
     )
 
     return (
-        <div className='w-full '>
+        <div className='w-full'>
             <header className='flex items-center gap-4 w-full'>
                 <SearchBar
                     searchInput={searchInput}

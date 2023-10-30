@@ -56,9 +56,23 @@ export const studentRequests = () => {
 
     }
 
-return {
-    getStudentById,
-    updateStudent,
-    newReport
-}
+    const deleteStudent = async ( studentId: string ) => {
+
+        try {
+
+            const res = await docmentorAPI.delete( `/student/${studentId}`, { headers: { Authorization: token } } )
+            return res
+
+        } catch ( error: any ) {
+            throw new Error( error.response.data )
+        }
+
+    }
+
+    return {
+        getStudentById,
+        updateStudent,
+        newReport,
+        deleteStudent
+    }
 }
