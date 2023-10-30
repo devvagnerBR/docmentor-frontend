@@ -9,13 +9,14 @@ import { UpdateStudent } from './modal/update-student'
 import { UpdateParent } from './modal/update-parent'
 import { Modal } from './modal'
 import { useModalContext } from '@/context/modal-context'
+import { NewReport } from '@/pages'
 
 export const StudentDetails = () => {
 
     const navigate = useNavigate()
     const { studentId } = useParams()
     const { student } = useStudentDetails( studentId! )
-    const { updateStudent, updateParent } = useModalContext()
+    const { updateStudent, updateParent, newReport } = useModalContext()
 
     const school = student?.school
     const parent = student?.parents
@@ -42,6 +43,12 @@ export const StudentDetails = () => {
                     </Modal.Root>
                 }
 
+                {newReport.state &&
+                    <Modal.Root>
+                        {newReport.state && <NewReport studentId={studentId!} />}
+                    </Modal.Root>
+                }
+
                 <header className='flex gap-4 items-center'>
                     <Icon.CaretLeft onClick={() => navigate( -1 )} size={32} weight='regular' className='fill-neutral-500 cursor-pointer' />
                     <h1 className='uppercase font-medium'>Informações do aluno</h1>
@@ -55,7 +62,7 @@ export const StudentDetails = () => {
                             title='editar perfil'
                         />
                     </div>
-                    <div className='flex gap-4 max-sm:flex-col max-sm:gap-1'>
+                    <div className='flex gap-4 max-sm:flex-col max-sm:gap-1 mt-2'>
                         <p className='text-sm font-light max-sm:text-xs max-sm:mt-2'>ESCOLA {school?.name}</p>
                         <p className='text-sm font-light max-sm:text-xs'>TURMA {student.school_grade}</p>
                     </div>
@@ -94,10 +101,10 @@ export const StudentDetails = () => {
                                 <h1 className='text-sm'>ENDEREÇO</h1>
                                 <p className='text-sm font-semibold '>{parent?.address} CENTRO - RIO DAS OSTRAS-RJ</p>
                             </div>
-                            <div className='pl-4 max-sm:pl-0 shrink-0'>
+                            {/* <div className='pl-4 max-sm:pl-0 shrink-0'>
                                 <h1 className='text-sm'>CEP</h1>
                                 <p className='text-sm font-semibold'>00000-000</p>
-                            </div>
+                            </div> */}
                         </section>
                         <section className='h-12 gap-4 divide-x-2 flex items-center'>
                             {parent?.phone_number1 && <div>
@@ -123,6 +130,7 @@ export const StudentDetails = () => {
                         <h2 className='font-semibold max-md:text-sm'>RELATÓRIOS</h2>
                     </header>
                     <button
+                        onClick={() => newReport.setState( true )}
                         className='mt-8 border mb-8 h-12 px-4 rounded-md border-neutral-900 bg-primary-400 text-white font-semibold'>
                         NOVO RELATÓRIO
                     </button>
@@ -137,7 +145,7 @@ export const StudentDetails = () => {
                                 {reports?.map( ( report ) => {
                                     return (
                                         <div key={report.id} className='flex items-center shrink-0'>
-                                            <div className='flex w-56 max-sm:w-fit max-sm:pr-4 gap-2 items-center shrink-0'>
+                                            <div className='flex w-64 max-sm:w-fit max-sm:pr-4 gap- items-center shrink-0'>
                                                 <Icon.Files size={18} weight='regular' className='fill-neutral-900' />
                                                 <p className=' font-medium text-neutral-900'>{limitText( report.title, 18 )}</p>
                                             </div>

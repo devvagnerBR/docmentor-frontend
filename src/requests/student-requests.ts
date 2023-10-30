@@ -1,5 +1,6 @@
 import { UpdateStudentFormData } from "@/hooks/use-update-student"
 import { docmentorAPI, getCookie } from "@/services"
+import { NewReportWithStudentId } from "@/types/report-interface"
 
 export const studentRequests = () => {
 
@@ -42,8 +43,22 @@ export const studentRequests = () => {
 
     }
 
-    return {
-        getStudentById,
-        updateStudent
+    const newReport = async ( body: NewReportWithStudentId ) => {
+
+        try {
+
+            const res = await docmentorAPI.post( `/report/${body.student_id}`, body, { headers: { Authorization: token } } )
+            return res
+
+        } catch ( error: any ) {
+            throw new Error( error.response.data )
+        }
+
     }
+
+return {
+    getStudentById,
+    updateStudent,
+    newReport
+}
 }

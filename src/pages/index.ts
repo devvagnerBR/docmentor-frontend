@@ -10,3 +10,4 @@ export { SignupForm } from "@/pages/signup/form"
 
 export { DashboardStudents } from "./dashboard/students"
 export { SearchBar } from "./dashboard/students/search-bar"
+export { NewReport } from "./dashboard/students/student-details/modal/new-report"

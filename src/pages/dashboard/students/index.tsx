@@ -52,6 +52,15 @@ export const DashboardStudents = () => {
                         </Link>
                     )
                 } )}
+                {students && students?.length >= 10 && <section className=' w-full items-center flex justify-center h-14 mt-16'>
+                    <div className='border shadow-sm  rounded-md h-full max-sm:w-full  px-4 flex gap-8 items-center justify-center'>
+                        <Icon.CaretLeft size={24} className='cursor-pointer' />
+                        <button className='font-medium'>1</button>
+                        <button className='font-medium'>2</button>
+                        <button className='font-medium'>3</button>
+                        <Icon.CaretRight size={24} className='cursor-pointer' />
+                    </div>
+                </section>}
             </main> : <p className='mt-4 text-neutral-500'>nenhum aluno encontrado</p>
             }
         </div >
