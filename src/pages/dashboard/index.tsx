@@ -10,8 +10,16 @@ import { useModalContext } from "@/context/modal-context";
 export const DashBoard = () => {
 
     useAuth()
-    const { newReport, updateParent, updateStudent } = useModalContext()
-    useFreezeScreen( newReport.state || updateParent.state || updateStudent.state )
+    const {
+        newReport,
+        updateParent,
+        updateStudent,
+        deleteStudent,
+        newParent
+    } = useModalContext()
+
+    const freezeScreen = newReport.state || updateParent.state || updateStudent.state || deleteStudent.state || newParent.state
+    useFreezeScreen( freezeScreen )
 
     return (
         <div className=" max-w-[1920px] w-full flex ">

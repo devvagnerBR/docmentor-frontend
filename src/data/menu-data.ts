@@ -4,7 +4,7 @@ export const menuData = [
     {
         id: 1,
         name: 'Alunos',
-        icon: Icon.Users,
+        icon: Icon.Student,
         path: '/painel/alunos',
         exact: true
     },
@@ -13,6 +13,13 @@ export const menuData = [
         name: 'Escolas',
         icon: Icon.ChalkboardSimple,
         path: 'escolas',
+        exact: true
+    },
+    {
+        id: 4,
+        name: 'Perfil',
+        icon: Icon.User,
+        path: 'perfil',
         exact: true
     },
     {

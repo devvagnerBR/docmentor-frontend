@@ -11,13 +11,20 @@ import { Modal } from './modal'
 import { useModalContext } from '@/context/modal-context'
 import { NewReport } from '@/pages'
 import { ConfirmStudentDelete } from './modal/confirm-student-delete'
+import { NewParent } from './modal/new-parent'
 
 export const StudentDetails = () => {
 
     const navigate = useNavigate()
     const { studentId } = useParams()
     const { student, deleteStudent } = useStudentDetails( studentId! )
-    const { updateStudent, updateParent, newReport, deleteStudent: deleteModal } = useModalContext()
+    const {
+        updateStudent,
+        updateParent,
+        newReport,
+        deleteStudent: deleteModal,
+        newParent
+    } = useModalContext()
 
     const school = student?.school
     const parent = student?.parents
@@ -55,7 +62,11 @@ export const StudentDetails = () => {
                         {deleteModal.state && <ConfirmStudentDelete studentId={studentId!} />}
                     </Modal.Root>
                 }
-
+                {newParent.state &&
+                    <Modal.Root>
+                        {newParent.state && <NewParent studentId={studentId!} />}
+                    </Modal.Root>
+                }
 
                 <header className='flex gap-4 items-center'>
                     <Icon.CaretLeft onClick={() => navigate( -1 )} size={32} weight='regular' className='fill-neutral-500 cursor-pointer' />
@@ -128,6 +139,7 @@ export const StudentDetails = () => {
                         </section>
                     </main> :
                         <button
+                            onClick={() => newParent.setState( true )}
                             className='mt-8 border h-12 px-4 rounded-md border-neutral-900 bg-primary-400 text-white font-semibold'>
                             CADASTRAR RESPONSÁVEL
                         </button>}
@@ -171,6 +183,7 @@ export const StudentDetails = () => {
                             </main>
                         </section>
                     }
+                    {reports && reports.length <= 0 && <p className='text-sm'>Nenhum relatório cadastrado</p>}
                     <div
                         onClick={() => deleteModal.setState( true )}
                         className='cursor-pointer w-fit flex gap-2 items-center  h-8 mt-4  rounded-md border-neutral-300'>
@@ -178,6 +191,6 @@ export const StudentDetails = () => {
                         <p className='text-red-400 font-light text-sm'>EXCLUIR ALUNO</p>
                     </div>
                 </section>
-            </div>
+            </div >
         )
 }
