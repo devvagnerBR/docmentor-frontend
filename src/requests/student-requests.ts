@@ -1,6 +1,15 @@
-import { UpdateStudentFormData } from "@/hooks/use-update-student"
+import { ServiceDays, UpdateStudentFormData } from "@/hooks/use-update-student"
 import { docmentorAPI, getCookie } from "@/services"
 import { NewReportWithStudentId } from "@/types/report-interface"
+
+
+export type NewStudentFormData = {
+    name: string
+    birthday: string
+    school_year: string
+    service_days: ServiceDays[]
+    school_id: string
+}
 
 export const studentRequests = () => {
 
@@ -69,10 +78,35 @@ export const studentRequests = () => {
 
     }
 
+    const addNewStudent = async ( data: NewStudentFormData ) => {
+
+        try {
+
+            const res = await docmentorAPI.post( `register/${data.school_id}`,
+                {
+                    name: data.name,
+                    birthday: String( new Date( data.birthday ).getTime() ),
+                    school_year: data.school_year,
+                    service_days: data.service_days,
+                },
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                } );
+
+            return res
+
+        } catch ( error: any ) {
+            throw new Error( error.response.data )
+        }
+
+    }
     return {
         getStudentById,
         updateStudent,
         newReport,
-        deleteStudent
+        deleteStudent,
+        addNewStudent
     }
 }

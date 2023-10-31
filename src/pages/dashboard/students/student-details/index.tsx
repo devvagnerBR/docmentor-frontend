@@ -12,6 +12,7 @@ import { useModalContext } from '@/context/modal-context'
 import { NewReport } from '@/pages'
 import { ConfirmStudentDelete } from './modal/confirm-student-delete'
 import { NewParent } from './modal/new-parent'
+import { NewStudent } from '../new-student'
 
 export const StudentDetails = () => {
 
@@ -23,7 +24,7 @@ export const StudentDetails = () => {
         updateParent,
         newReport,
         deleteStudent: deleteModal,
-        newParent
+        newParent,
     } = useModalContext()
 
     const school = student?.school
@@ -174,8 +175,22 @@ export const StudentDetails = () => {
                                             </div>
                                             <p className='w-48 max-sm:hidden shrink-0 font-medium text-neutral-900'>{momentJS( report.updated_at ).format( 'DD/MM/YYYY' )}</p>
                                             <div className='flex gap-4 w-40 items-center'>
-                                                <Icon.ArrowSquareDown size={28} weight='light' className='fill-neutral-900 cursor-pointer' />
-                                                <Icon.Download size={28} weight='light' className='fill-neutral-900 cursor-pointer' />
+                                                <p
+                                                    title='Visualizar'>
+                                                    <Icon.ReadCvLogo
+                                                        size={28}
+                                                        weight='light'
+                                                        className='fill-neutral-900 cursor-pointer hover:fill-primary-400'
+                                                    />
+                                                </p>
+                                                <p
+                                                    title='Baixar'>
+                                                    <Icon.Download
+                                                        size={28}
+                                                        weight='light'
+                                                        className='fill-neutral-900 cursor-pointer hover:fill-primary-400'
+                                                    />
+                                                </p>
                                             </div>
                                         </div>
                                     )

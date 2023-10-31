@@ -21,6 +21,10 @@ interface UserContextProps {
         state: boolean;
         setState: React.Dispatch<React.SetStateAction<boolean>>;
     }
+    newStudent: {
+        state: boolean;
+        setState: React.Dispatch<React.SetStateAction<boolean>>;
+    }
 
 }
 
@@ -32,7 +36,8 @@ const ModalContextProvider = ( { children }: React.PropsWithChildren ) => {
     const [updateParentModal, setUpdateParentModal] = React.useState<boolean>( false )
     const [newReportModal, setNewReportModal] = React.useState<boolean>( false )
     const [deleteStudentModal, setDeleteStudentModal] = React.useState<boolean>( false )
-    const [newParentModal, setNewParentModal] = React.useState<boolean>( true )
+    const [newParentModal, setNewParentModal] = React.useState<boolean>( false )
+    const [newStudentModal, setNewStudentModal] = React.useState<boolean>( false )
 
     const updateStudent = {
         state: updateStudentModal,
@@ -58,8 +63,21 @@ const ModalContextProvider = ( { children }: React.PropsWithChildren ) => {
         state: newParentModal,
         setState: setNewParentModal
     }
+
+    const newStudent = {
+        state: newStudentModal,
+        setState: setNewStudentModal
+    }
+
     return (
-        <ModalContext.Provider value={{ updateStudent, updateParent, newReport, deleteStudent, newParent }}>
+        <ModalContext.Provider value={{
+            updateStudent,
+            updateParent,
+            newReport,
+            deleteStudent,
+            newParent,
+            newStudent
+        }}>
             {children}
         </ModalContext.Provider>
     )

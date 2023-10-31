@@ -6,12 +6,19 @@ import { useQuery } from 'react-query'
 import { StudentInterface } from '@/types/student-interface'
 import { getPageWidth, limitText } from '@/utils'
 import { Link } from 'react-router-dom'
+import { useModalContext } from '@/context/modal-context'
+import { Modal } from '../students/student-details/modal'
+import { NewStudent } from './new-student'
 
 export const DashboardStudents = () => {
 
     const [searchInput, setSearchInput] = React.useState<string>( "" )
     const user = userRequests()
     const { size } = getPageWidth()
+
+    const {
+        newStudent
+    } = useModalContext()
 
     const { data: students } = useQuery<StudentInterface[]>(
         ["students", searchInput],
@@ -24,13 +31,25 @@ export const DashboardStudents = () => {
 
     return (
         <div className='w-full'>
+
+            {newStudent.state &&
+                <Modal.Root>
+                    {newStudent.state && <NewStudent />}
+                </Modal.Root>
+            }
             <header className='flex items-center gap-4 w-full'>
                 <SearchBar
                     searchInput={searchInput}
                     setSearchInput={setSearchInput}
                 />
-                <div className='border cursor-pointer h-14 w-14 flex items-center shrink-0 justify-center rounded-md bg-primary-400 border-neutral-900'>
-                    <Icon.UserPlus className='fill-neutral-900' size={28} weight='light' />
+                <div
+                    onClick={() => newStudent.setState( true )}
+                    className='border cursor-pointer h-14 w-14 flex items-center shrink-0 justify-center rounded-md bg-primary-400 border-neutral-900'>
+                    <Icon.UserPlus
+                        className='fill-neutral-900'
+                        size={28}
+                        weight='light'
+                    />
                 </div>
             </header>
             {students && students?.length > 0 ? <main className='mt-4'>
